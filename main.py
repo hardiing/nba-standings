@@ -5,20 +5,7 @@ import requests
 from nba_api.stats import endpoints
 import psycopg2
 from config import config
-
-def get_league_leaders_data():
-    data = endpoints.leagueleaders.LeagueLeaders()
-
-    df = data.league_leaders.get_data_frame()
-
-    print(df.head())
-
-def get_league_standings_data():
-    data = endpoints.leaguestandings.LeagueStandings()
-    
-    df = data.standings.get_data_frame()
-
-    print(df.head())
+from create_tables import create_tables
 
 def connect_to_psql():
     conn = None
@@ -52,9 +39,8 @@ def connect_to_psql():
             print("Database connection closed")
 
 def main():
-    # get_league_leaders_data()
-    # get_league_standings_data()
     connect_to_psql()
+    create_tables()
 
 if __name__ == "__main__":
     main()
