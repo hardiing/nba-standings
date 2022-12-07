@@ -1,46 +1,25 @@
-# from matplotlib.pyplot import get
+from flask import Flask, render_template
+from flask_mysqldb import MySQL
+import MySQLdb.cursors
 import pandas as pd
-import numpy as np
-import requests
 from nba_api.stats import endpoints
-import psycopg2
 from config import config
 from create_tables import create_tables
 
-def connect_to_psql():
-    conn = None
-    try:
-        # read connection parameters
-        params = config()
+#  connect flask and MySQL
+app = Flask(__name__)
+app.config["MYSQL_HOST"] = "db"
+app.config["MYSQL_USER"] = "root"
+app.config["MYSQL_PASSWORD"] = "root"
+app.config["MYSQL_PORT"] = 3306
+app.config["MYSQL_DB"] = "nba"
 
-        # connect to PostgreSQL server
-        print("Connecting to PostgreSQL...")
-        conn = psycopg2.connect(**params)
+mysql = MySQL(app)
 
-        # create a cursor
-        cur = conn.cursor()
-
-        # execute a statement
-        print("PostgreSQL database version:")
-        cur.execute("SELECT version();")
-
-        # display PostgreSQL database server version
-        db_version = cur.fetchone()
-        print(db_version)
-
-        # close connection to PostgreSQL
-        cur.close()
-    
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    finally:
-        if conn is not None:
-            conn.close()
-            print("Database connection closed")
-
+@app.route("/", methods=["GET", "POST"])
+#  return index page to start
 def main():
-    connect_to_psql()
-    create_tables()
+    return render_template("index.html")
 
 if __name__ == "__main__":
     main()

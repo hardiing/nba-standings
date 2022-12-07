@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import psycopg2
 from config import config
 from nba_api.stats import endpoints
 from sqlalchemy import create_engine
