@@ -21,8 +21,8 @@ mysql = MySQL(app)
 def main():
     return render_template("index.html")
 
-@app.route("/league_leaders", methods=["GET", "POST"])
-def league_leaders():
+@app.route("/ppg", methods=["GET", "POST"])
+def ppg():
 
     engine = create_engine(cred.string)
     conn = engine.connect()
@@ -31,13 +31,52 @@ def league_leaders():
     df = data.league_leaders.get_data_frame()
     df.to_sql("stats", con=conn, if_exists="replace", index=False)
 
+    headings = ("Player", "Team", "GP", "PPG", "RPG", "APG", "SPG", "BPG")
     cur = mysql.connection.cursor()
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT * FROM stats")
+    cursor.execute("SELECT PLAYER, TEAM, GP, (PTS/GP) AS PPG, (REB/GP) AS RPG, (AST/GP) AS APG, (STL/GP) AS SPG, (BLK/GP) AS BPG FROM stats ORDER BY PPG DESC LIMIT 10;")
     data = cursor.fetchall()
     cursor.close()
     
-    return render_template("league_leaders.html")
+    return render_template("ppg.html", headings=headings, data=data)
+
+@app.route("/rpg", methods=["GET", "POST"])
+def rpg():
+
+    engine = create_engine(cred.string)
+    conn = engine.connect()
+
+    data = endpoints.leagueleaders.LeagueLeaders()
+    df = data.league_leaders.get_data_frame()
+    df.to_sql("stats", con=conn, if_exists="replace", index=False)
+
+    headings = ("Player", "Team", "GP", "PPG", "RPG", "APG", "SPG", "BPG")
+    cur = mysql.connection.cursor()
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT PLAYER, TEAM, GP, (PTS/GP) AS PPG, (REB/GP) AS RPG, (AST/GP) AS APG, (STL/GP) AS SPG, (BLK/GP) AS BPG FROM stats ORDER BY RPG DESC LIMIT 10;")
+    data = cursor.fetchall()
+    cursor.close()
+
+    return render_template("rpg.html", headings=headings, data=data)
+
+@app.route("/apg", methods=["GET", "POST"])
+def apg():
+
+    engine = create_engine(cred.string)
+    conn = engine.connect()
+
+    data = endpoints.leagueleaders.LeagueLeaders()
+    df = data.league_leaders.get_data_frame()
+    df.to_sql("stats", con=conn, if_exists="replace", index=False)
+
+    headings = ("Player", "Team", "GP", "PPG", "RPG", "APG", "SPG", "BPG")
+    cur = mysql.connection.cursor()
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT PLAYER, TEAM, GP, (PTS/GP) AS PPG, (REB/GP) AS RPG, (AST/GP) AS APG, (STL/GP) AS SPG, (BLK/GP) AS BPG FROM stats ORDER BY APG DESC LIMIT 10;")
+    data = cursor.fetchall()
+    cursor.close()
+
+    return render_template("apg.html", headings=headings, data=data)
 
 if __name__ == "__main__":
     main()
