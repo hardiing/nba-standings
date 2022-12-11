@@ -1,2 +1,3 @@
 database.ini
 cred.py
+__pycache__/

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+        <title>NBA Data Project</title>
+    </head>
+
+    <body>
+        <div id="main">
+            <header class="header">
+                <nav>
+                    <h1><a href="{{ url_for("main") }}">NBA Data Project</a></h1>
+                    <ul>
+                        <li><a href="{{ url_for("ppg") }}">PPG</a></li>
+                        <li><a href="{{ url_for("rpg") }}">RPG</a></li>
+                        <li><a href="{{ url_for("apg") }}">APG</a></li>
+                        <li><a href="{{ url_for("league_standings") }}">League Standings</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div class="text">
+                <h2>Data found in each table:</h2><br>
+                <p><b>Win Trends:</b> Win/Loss Records, Winning Percentage, Margin of Victory, and Against the Spread +/-</p><br>
+                <p><b>Against the Spread Trends:</b> Against the Spread Record, Cover Percentage, Margin of Victory, and Against the Spread +/-</p><br>
+                <p><b>Over/Under Trends:</b> Over Record, Over Percentage, Under Percentage, and Total +/-</p><br>
+                <p><b>Custom Table:</b> Against the Spread Record, Cover Percentage, and Margin of Victory</p><br>
+                <h2>About the project:</h2><br>
+                <p>A web scraping application to collect multiple tables with data that can be used to study trends in the NFL
+                    regarding gambling. Includes a custom table joining data from multiple tables built with an SQL query.</p><br>
+                <p>Technologies used: Python, Flask, Docker, MySQL, HTML/CSS</p>
+            </div>
+        </div>
+    </body>
+</html>

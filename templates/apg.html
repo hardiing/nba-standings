@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+        <title>NBA Data Project</title>
+    </head>
+
+    <body>
+        <div id="main">
+            <header class="header">
+                <nav>
+                    <h1><a href="{{ url_for("main") }}">NBA Data Project</a></h1>
+                    <ul>
+                        <li><a href="{{ url_for("ppg") }}">PPG</a></li>
+                        <li><a href="{{ url_for("rpg") }}">RPG</a></li>
+                        <li><a href="{{ url_for("apg") }}">APG</a></li>
+                        <li><a href="{{ url_for("league_standings") }}">League Standings</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div id="table">
+                <table>
+                    <tr>
+                        {% for header in headings %}
+                        <th>{{ header }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for item in data %}
+                    <tr>
+                        <td>{{item.PLAYER}}</td>
+                        <td>{{item.TEAM}}</td>
+                        <td>{{item.GP}}</td>
+                        <td>{{item.PPG}}</td>
+                        <td>{{item.RPG}}</td>
+                        <td>{{item.APG}}</td>
+                        <td>{{item.SPG}}</td>
+                        <td>{{item.BPG}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
