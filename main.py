@@ -78,5 +78,24 @@ def apg():
 
     return render_template("apg.html", headings=headings, data=data)
 
+@app.route("/league_standings", methods=["GET", "POST"])
+def league_standings():
+
+    engine = create_engine(cred.string)
+    conn = engine.connect()
+
+    data = endpoints.leaguestandings.LeagueStandings()
+    df = data.standings.get_data_frame()
+    df.to_sql("standings", con=conn, if_exists="replace", index=False)
+
+    headings = ("Rank", "Team", "Record", "Home Record", "Road Record", "L10", "PPG", "Opp PPG", "Opp Over .500", "Post ASB")
+    cur = mysql.connection.cursor()
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute("SELECT PlayoffRank, TeamCity, Record, HOME, ROAD, L10, PointsPG, OppPointsPG, OppOver500, PostAS FROM standings ORDER BY PlayoffRank;")
+    data = cursor.fetchall()
+    cursor.close()
+
+    return render_template("league_standings.html", headings=headings, data=data)
+
 if __name__ == "__main__":
     main()

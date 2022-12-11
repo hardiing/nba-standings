@@ -30,14 +30,16 @@
                     </tr>
                     {% for item in data %}
                     <tr>
-                        <td>{{item.PLAYER}}</td>
-                        <td>{{item.TEAM}}</td>
-                        <td>{{item.GP}}</td>
-                        <td>{{item.PPG}}</td>
-                        <td>{{item.RPG}}</td>
-                        <td>{{item.APG}}</td>
-                        <td>{{item.SPG}}</td>
-                        <td>{{item.BPG}}</td>
+                        <td>{{item.PlayoffRank}}</td>
+                        <td>{{item.TeamCity}}</td>
+                        <td>{{item.Record}}</td>
+                        <td>{{item.HOME}}</td>
+                        <td>{{item.ROAD}}</td>
+                        <td>{{item.L10}}</td>
+                        <td>{{item.PointsPG}}</td>
+                        <td>{{item.OppPointsPG}}</td>
+                        <td>{{item.OppOver500}}</td>
+                        <td>{{item.PostAS}}</td>
                     </tr>
                     {% endfor %}
                 </table>
