@@ -23,13 +23,15 @@
             </header>
             <div class="text">
                 <h2>Data found in each table:</h2><br>
-                <p><b>Win Trends:</b> Win/Loss Records, Winning Percentage, Margin of Victory, and Against the Spread +/-</p><br>
-                <p><b>Against the Spread Trends:</b> Against the Spread Record, Cover Percentage, Margin of Victory, and Against the Spread +/-</p><br>
-                <p><b>Over/Under Trends:</b> Over Record, Over Percentage, Under Percentage, and Total +/-</p><br>
-                <p><b>Custom Table:</b> Against the Spread Record, Cover Percentage, and Margin of Victory</p><br>
+                <p><b>PPG:</b> Player stats ordered by points per game, limited to top 10</p><br>
+                <p><b>RPG:</b> Player stats ordered by rebounds per game, limited to top 10</p><br>
+                <p><b>APG:</b> Player stats ordered by assists per game, limited to top 10</p><br>
+                <p><b>League Standings:</b> conference rank, team, record, home record, road record, last 10 record,<br>
+                    PPG, opponent PPG, record against opponents over .500, and record post-all-star break, ordered by conference rank</p><br>
                 <h2>About the project:</h2><br>
-                <p>A web scraping application to collect multiple tables with data that can be used to study trends in the NFL
-                    regarding gambling. Includes a custom table joining data from multiple tables built with an SQL query.</p><br>
+                <p>A flask application that collects data from a couple different NBA API endpoints and inserts them
+                    into a MySQL database. The HTML tables are built by querying the tables for the data most relevant
+                    to me.</p><br>
                 <p>Technologies used: Python, Flask, Docker, MySQL, HTML/CSS</p>
             </div>
         </div>
